@@ -76,9 +76,12 @@ async function uploadOne(ctx, file, token, folderId) {
 
 module.exports = (ctx) => {
   const register = () => {
-    const uploader = {
-      name: 'tucang',
-      title: '图仓',
+    // PicGo 3.x：helper.uploader.register(id, { name, handle, config })
+    // （2.x 的单参数写法 register(uploaderObj) 在 3.x 会因缺 handle 抛错，导致插件被移除）
+    ctx.helper.uploader.register('tucang', {
+      get name() {
+        return '图仓'
+      },
       config: () => [
         {
           name: 'token',
@@ -122,8 +125,7 @@ module.exports = (ctx) => {
           ctx.output.push(await uploadOne(ctx, file, config.token, folderId))
         }
       },
-    }
-    ctx.helper.uploader.register(uploader)
+    })
   }
   return { register }
 }
