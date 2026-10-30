@@ -24,11 +24,18 @@ cd 你的项目目录
 npm install ./picgo-plugin-tucang
 ```
 
-### 方式二：PicGo 桌面版
+### 方式二：PicGo 桌面版（3.x）
 
-1. 打开 PicGo → 设置 → 插件设置 → 安装插件。
-2. 输入插件名 `picgo-plugin-tucang`（发布到 npm 后可用）；
-   本地未发布时，可把 `picgo-plugin-tucang` 整个文件夹放入 PicGo 插件目录后重启。
+插件未发布到 npm 时，使用手动安装：
+
+1. 关闭 PicGo。
+2. 把 `picgo-plugin-tucang` 整个文件夹复制到 PicGo 数据目录的 `node_modules` 下：
+   - Windows：`%APPDATA%\picgo\node_modules\picgo-plugin-tucang\`
+3. 编辑 `%APPDATA%\picgo\package.json`，在 `dependencies` 中加入 `"picgo-plugin-tucang": "1.1.0"`。
+4. 编辑 `%APPDATA%\picgo\data.json` 的 `picgoPlugins` 加入 `"picgo-plugin-tucang": true`（`data.bak.json` / `config.snapshot.json` 如有也同步）。
+5. 重启 PicGo，在「图床设置」中即可看到「图仓」。
+
+> 若 PicGo 插件页报 `spawn npm ENOENT` / `NPM is not installed`，说明系统未安装 Node.js/npm，请先安装 Node.js LTS（nodejs.org 或 npmmirror.com），安装后重新打开终端再试。
 
 ## 配置
 
