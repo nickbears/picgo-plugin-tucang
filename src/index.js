@@ -1,3 +1,12 @@
+/**
+ * picgo-plugin-tucang - PicGo 图仓(tucang.cc)上传插件
+ *
+ * 作者：小奶鲨
+ * GitHub：https://github.com/nickbears
+ * 微信：nickbears
+ * License：MIT
+ */
+
 'use strict'
 
 const fs = require('fs')
