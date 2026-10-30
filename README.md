@@ -2,7 +2,7 @@
 
 > 作者：小奶鲨 | GitHub：https://github.com/nickbears | 微信：nickbears
 
-PicGo 上传插件：图仓（[tucang.cc](https://tucang.cc)）免费图床。
+> PicGo 上传插件：图仓（[tucang.cc](https://tucang.cc)）免费图床。
 
 ## 接口依据
 
