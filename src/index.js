@@ -67,8 +67,15 @@ async function uploadOne(ctx, file, token, folderId) {
     body: form,
   })
 
-  // 兼容 axios 风格的 response（resp.data 为响应体）
-  const body = resp && resp.data ? resp.data : resp
+  // 兼容 axios 风格的 response（resp.data 为响应体）；部分情况下响应体是 JSON 字符串
+  let body = resp && resp.data ? resp.data : resp
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body)
+    } catch (e) {
+      // 解析失败则按原字符串处理
+    }
+  }
 
   if (body && body.code === '200' && body.data && body.data.url) {
     return {
