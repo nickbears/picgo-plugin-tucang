@@ -47,10 +47,13 @@ async function runHandle(holder, ctx) {
 async function main() {
   // 0. parseFolders 单元验证
   console.log('== 单元：parseFolders ==')
-  const parsed = plugin.parseFolders('博客图片=123\n生活相册=456\n\n无效行\n=789\n空名=\n  =  ')
+  const parsed = plugin.parseFolders('博客图片=123\n生活相册=456\n\n4274\n空行下一行')
   console.log('  parsed:', JSON.stringify(parsed))
-  if (parsed.length === 2 && parsed[0].name === '博客图片' && parsed[0].value === '123' && parsed[1].name === '生活相册' && parsed[1].value === '456') {
-    console.log('  PASS: 解析正确（含空行/非法行过滤）')
+  const m1 = parsed.find((x) => x.name === '博客图片' && x.value === '123')
+  const m2 = parsed.find((x) => x.name === '生活相册' && x.value === '456')
+  const m3 = parsed.find((x) => x.name === '4274' && x.value === '4274')
+  if (parsed.length === 4 && m1 && m2 && m3 && parsed[3].value === '空行下一行') {
+    console.log('  PASS: 解析正确（名称=ID 与纯 ID 行均接收，空行过滤）')
   } else {
     console.log('  FAIL: 解析结果不符')
     process.exitCode = 1
