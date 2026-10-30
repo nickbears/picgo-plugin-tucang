@@ -8,8 +8,8 @@ function makeCtx({ token, folderMap, folder, simulateResponse }) {
   const ctx = {
     helper: {
       uploader: {
-        register(u) {
-          holder.registered = u
+        register(id, u) {
+          holder.registered = { ...u, name: id }
         },
       },
     },
