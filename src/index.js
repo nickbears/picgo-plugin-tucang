@@ -6,10 +6,11 @@ const FormData = require('form-data')
 const API_UPLOAD = 'https://api.tucang.cc/api/v1/upload'
 
 /**
- * 解析"文件夹映射"文本：每行一个 "名称=ID"。
+ * 解析"文件夹映射"文本：每行一个 "名称=ID"，或直接写一个纯 ID。
  * 例如：
  *   博客图片=123
  *   生活相册=456
+ *   789        ← 纯 ID 行，下拉显示名与 ID 相同
  */
 function parseFolders(text) {
   if (!text) return []
@@ -18,10 +19,14 @@ function parseFolders(text) {
     const t = line.trim()
     if (!t) continue
     const idx = t.lastIndexOf('=')
-    if (idx <= 0 || idx === t.length - 1) continue
-    const name = t.slice(0, idx).trim()
-    const value = t.slice(idx + 1).trim()
-    if (name && value) list.push({ name, value })
+    if (idx > 0 && idx < t.length - 1) {
+      const name = t.slice(0, idx).trim()
+      const value = t.slice(idx + 1).trim()
+      if (name && value) list.push({ name, value })
+    } else {
+      // 纯 ID 行：整行即文件夹 ID，下拉显示名与 ID 相同
+      list.push({ name: t, value: t })
+    }
   }
   return list
 }
@@ -29,12 +34,15 @@ function parseFolders(text) {
 /**
  * 从 PicGo 输入项中取出图片 Buffer。
  * PicGo 2.x 的输入项为 { buffer, fileName, ... }，
- * 旧版本或部分来源只有 path，这里做兼容。
+ * path transformer 下为 { path, fileName, ... }，这里做兼容。
  */
 function getBuffer(file) {
+  if (!file) throw new Error('上传项为空')
   if (file.buffer) return file.buffer
-  if (file.path) return fs.readFileSync(file.path)
-  throw new Error('无法读取图片文件（缺少 buffer/path）')
+  const p = file.path || file.filePath || (typeof file === 'string' ? file : '')
+  if (p) return fs.readFileSync(p)
+  const keys = typeof file === 'object' ? Object.keys(file).join(',') : typeof file
+  throw new Error(`无法读取图片文件（缺少 buffer/path），字段：${keys}`)
 }
 
 function getFileName(file) {
@@ -97,8 +105,8 @@ module.exports = (ctx) => {
           alias: '文件夹映射',
           default: '',
           required: false,
-          message: '每行一个：文件夹名=文件夹ID',
-          tips: '每行一个"名称=ID"，例如：\n博客图片=123\n生活相册=456\n\n- 文件夹ID 可在图仓【图片管理】中查看\n- 修改名称即可重命名下拉选项\n- 留空则上传到根目录',
+          message: '每行一个：文件夹名=文件夹ID，或直接写文件夹ID',
+          tips: '每行一个"名称=ID"，或直接写文件夹ID，例如：\n博客图片=123\n456\n\n- 文件夹ID 可在图仓【图片管理】中查看\n- 修改名称即可重命名下拉选项\n- 留空则上传到根目录',
         },
         {
           name: 'folder',
