@@ -1,6 +1,6 @@
 {
   "name": "picgo-plugin-tucang",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "PicGo 上传插件：图仓（tucang.cc）免费图床",
   "main": "src/index.js",
   "scripts": {
