@@ -68,3 +68,9 @@ npm install ./picgo-plugin-tucang
 
 - 图仓官方建议对接方做好健壮性：若图仓服务不稳定导致上传失败，建议本地先保留原图，必要时自行重试或降级。
 - 本插件当前仅实现「上传」能力；如需「删除图片」（`POST /api/v1/deleteImage`），可作为后续版本补充。
+
+## 版权
+
+作者：小奶鲨
+GitHub：https://github.com/nickbears
+微信：nickbears
