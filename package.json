@@ -1,7 +1,7 @@
 {
   "name": "picgo-plugin-tucang",
   "version": "1.2.0",
-  "description": "PicGo 上传插件：图仓（tucang.cc）免费图床",
+  "description": "PicGo 上传插件：图仓（tucang.cc）免费图床 ｜ 作者：小奶鲨",
   "main": "src/index.js",
   "scripts": {
     "test": "node --check src/index.js"
