@@ -16,7 +16,7 @@ PicGo 上传插件：图仓（[tucang.cc](https://tucang.cc)）免费图床。
 
 ## 要求
 
-- PicGo **3.0 及以上**（v1.1.0 使用 3.0 的"联动字段"特性生成文件夹下拉框）
+- PicGo **3.0 及以上**（v1.1.0 起使用 3.0 的"联动字段"特性生成文件夹下拉框）
 - Node.js 14+
 
 ## 安装
@@ -35,7 +35,7 @@ npm install ./picgo-plugin-tucang
 1. 关闭 PicGo。
 2. 把 `picgo-plugin-tucang` 整个文件夹复制到 PicGo 数据目录的 `node_modules` 下：
    - Windows：`%APPDATA%\picgo\node_modules\picgo-plugin-tucang\`
-3. 编辑 `%APPDATA%\picgo\package.json`，在 `dependencies` 中加入 `"picgo-plugin-tucang": "1.1.0"`。
+3. 编辑 `%APPDATA%\picgo\package.json`，在 `dependencies` 中加入 `"picgo-plugin-tucang": "1.2.1"`。
 4. 编辑 `%APPDATA%\picgo\data.json` 的 `picgoPlugins` 加入 `"picgo-plugin-tucang": true`（`data.bak.json` / `config.snapshot.json` 如有也同步）。
 5. 重启 PicGo，在「图床设置」中即可看到「图仓」。
 
