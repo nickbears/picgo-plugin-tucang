@@ -1,3 +1,5 @@
+![图仓插件图标](assets/icon.svg)
+
 # picgo-plugin-tucang
 
 **作者：小奶鲨 ｜ GitHub：https://github.com/nickbears ｜ 微信：nickbears**
